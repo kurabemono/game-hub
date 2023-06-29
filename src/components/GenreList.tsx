@@ -14,7 +14,9 @@ import useGameQueryStore from "../store";
 const GenreList = () => {
   const { data, isLoading, error } = useGenres();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const { gameQuery, setGenreId } = useGameQueryStore();
+  // const { gameQuery, setGenreId } = useGameQueryStore();
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setSelectedGenreId = useGameQueryStore((s) => s.setGenreId);
 
   if (error) return null;
 
@@ -42,8 +44,8 @@ const GenreList = () => {
               <Button
                 whiteSpace="normal"
                 textAlign="left"
-                fontWeight={genre.id === gameQuery.genreId ? "bold" : "normal"}
-                onClick={() => setGenreId(genre.id)}
+                fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
+                onClick={() => setSelectedGenreId(genre.id)}
                 fontSize="lg"
                 variant="link"
               >
